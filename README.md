@@ -1,6 +1,6 @@
 # PayloadLab — Mechanical Payload Integration Workbench
 
-PayloadLab is a native Python desktop application for preliminary mechanical-interface screening. It opens as a normal Windows application—there is no browser, local web server, URL, or hosted interface.
+PayloadLab is a native Python desktop application for preliminary mechanical-interface screening. It opens as a normal Windows application.
 
 The application provides two modes from the header:
 
@@ -23,10 +23,10 @@ python app.py
 
 Inputs are grouped in a persistent, scrollable panel on the left:
 
-1. **Payload properties** — envelope, mass and CG coordinates.
-2. **Mounting interface** — mount coordinates, safety factor and bolt allowables.
-3. **Interface load case** — named signed acceleration components.
-4. **Mode-specific inputs** — host constraints, robot/support geometry, or drone mass/thrust limits.
+1. **Payload properties** : envelope, mass and CG coordinates.
+2. **Mounting interface** : mount coordinates, safety factor and bolt allowables.
+3. **Interface load case** : named signed acceleration components.
+4. **Mode-specific inputs** : host constraints, robot/support geometry, or drone mass/thrust limits.
 
 Every numerical field displays its unit in a dedicated column. Mounting points are identified as `MP-01`, `MP-02`, etc., avoiding confusion with metric thread designations such as M6. Coordinates use one `X, Y` pair per line, for example:
 
