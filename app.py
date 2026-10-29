@@ -483,10 +483,12 @@ class PayloadLabApp(tk.Tk):
             utilization = float(row["combined_util"])
             bolt_passes = utilization <= 1
             bolt_detail = f"bolt utilization {utilization:.3f}"
+        equilibrium_passes = mounts.equilibrium_ok
+        equilibrium_detail = "equilibrium verified" if equilibrium_passes else "equilibrium failed"
 
         if stability is not None:
-            status = "PASS" if stability.passes and bolt_passes else "FAIL"
-            detail = f"{stability.governing_margin_m*1000:.0f} mm at {stability.governing_edge} · {bolt_detail}"
+            status = "PASS" if stability.passes and bolt_passes and equilibrium_passes else "FAIL"
+            detail = f"{stability.governing_margin_m*1000:.0f} mm at {stability.governing_edge} · {bolt_detail} · {equilibrium_detail}"
             self._set_mode_metrics([
                 ("LONGITUDINAL CRITICAL ACCEL.", f"{stability.critical_longitudinal_accel_mps2:.2f} m/s²"),
                 ("LATERAL CRITICAL ACCEL.", f"{stability.critical_lateral_accel_mps2:.2f} m/s²"),
@@ -494,8 +496,8 @@ class PayloadLabApp(tk.Tk):
                 ("LATERAL CRITICAL SLOPE", f"{stability.critical_lateral_slope_deg:.1f}°"),
             ])
         elif drone is not None:
-            status = "PASS" if drone.passes and bolt_passes else "FAIL"
-            detail = f"thrust margin {drone.thrust_margin*100:.1f}% · {bolt_detail}"
+            status = "PASS" if drone.passes and bolt_passes and equilibrium_passes else "FAIL"
+            detail = f"thrust margin {drone.thrust_margin*100:.1f}% · {bolt_detail} · {equilibrium_detail}"
             gross_text = "Not set" if drone.gross_mass_margin_kg is None else f"{drone.gross_mass_margin_kg:+.2f} kg margin"
             self._set_mode_metrics([
                 ("GROSS MASS", f"{drone.total_mass_kg:.2f} kg · {gross_text}"),
@@ -507,8 +509,8 @@ class PayloadLabApp(tk.Tk):
             mass_state, mass_margin = optional_limit_status(self._number("mass"), self._number("mass_limit"))
             env_state, env_margins = envelope_status(dimensions, [self._number("env_l"), self._number("env_w"), self._number("env_h")])
             constraints_pass = mass_state != "FAIL" and env_state != "FAIL"
-            status = "PASS" if constraints_pass and bolt_passes else "FAIL"
-            detail = f"mass {mass_state.lower()} · envelope {env_state.lower()} · {bolt_detail}"
+            status = "PASS" if constraints_pass and bolt_passes and equilibrium_passes else "FAIL"
+            detail = f"mass {mass_state.lower()} · envelope {env_state.lower()} · {bolt_detail} · {equilibrium_detail}"
             mass_text = "Not set" if mass_margin is None else f"{mass_margin:+.1f} kg margin"
             envelope_text = "Not set" if env_margins is None else " / ".join(f"{value:+.0f} mm" for value in env_margins)
             self._set_mode_metrics([
