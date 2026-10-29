@@ -2,7 +2,7 @@
 
 PayloadLab is a native Python desktop application for preliminary mechanical-interface screening. It opens as a normal Windows application.
 
-The application provides two modes from the header:
+The application provides three modes from the header:
 
 - **Hosted Space Payload** — interface reactions, mass/envelope constraints and CG-height sensitivity.
 - **Mobile Robot Payload** — quasi-static support-polygon stability plus the shared mounting-interface calculation.
