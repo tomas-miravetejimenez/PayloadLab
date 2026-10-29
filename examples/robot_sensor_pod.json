@@ -1,0 +1,10 @@
+{
+  "payload_name": "Illustrative sensor pod",
+  "payload_mass_kg": 12.0,
+  "payload_position_m": [0.22, 0.0, 0.72],
+  "robot_mass_kg": 85.0,
+  "robot_cg_m": [0.0, 0.0, 0.31],
+  "support_polygon_m": [0.9, 0.62],
+  "longitudinal_acceleration_mps2": 2.5,
+  "lateral_acceleration_mps2": 1.8
+}

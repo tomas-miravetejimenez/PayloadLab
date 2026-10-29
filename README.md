@@ -96,4 +96,3 @@ The calculation engine has no GUI dependency, so it can also be imported into an
 PayloadLab is an early screening model, not a complete bolted-joint analysis, FEA model, qualification assessment or dynamic simulation. It does not evaluate enclosure-wall stress, host deformation, preload, bearing, pull-through, thread stripping, nonlinear contact, fatigue, detailed shock or vibration.
 
 Robot mode does not represent individual contact forces, active suspension, gait dynamics, wheel slip, tyre compliance, terrain deformation, control response or impact dynamics. Engineering judgement remains required.
-
