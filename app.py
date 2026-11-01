@@ -52,11 +52,11 @@ class ScrollableFrame(ttk.Frame):
 
 
 class PayloadLabApp(tk.Tk):
-    """Native PayloadLab application backed by the deterministic engine."""
+    """Main Tkinter application for PayloadLab."""
 
     def __init__(self) -> None:
         super().__init__()
-        self.title("PayloadLab — Mechanical Payload Integration Workbench")
+        self.title("PayloadLab: Mechanical Payload Integration Workbench")
         self.geometry("1450x900")
         self.minsize(1180, 720)
         self.configure(background=APP_BG)
@@ -147,7 +147,7 @@ class PayloadLabApp(tk.Tk):
             card = ttk.Frame(cards, style="Card.TFrame", padding=(12, 10))
             card.grid(row=0, column=index, sticky="nsew", padx=(0 if index == 0 else 5, 0 if index == 3 else 5))
             ttk.Label(card, text=key.upper(), style="CardLabel.TLabel").pack(anchor="w")
-            value = ttk.Label(card, text="—", style="CardValue.TLabel")
+            value = ttk.Label(card, text="-", style="CardValue.TLabel")
             value.pack(anchor="w", pady=(5, 1))
             sub = ttk.Label(card, text="", style="Muted.Panel.TLabel", wraplength=210)
             sub.pack(anchor="w")
@@ -160,9 +160,9 @@ class PayloadLabApp(tk.Tk):
             facts.columnconfigure(index, weight=1, uniform="fact")
             item = ttk.Frame(facts, style="Panel.TFrame", padding=(8, 5))
             item.grid(row=0, column=index, sticky="ew")
-            label = ttk.Label(item, text="—", style="CardLabel.TLabel")
+            label = ttk.Label(item, text="-", style="CardLabel.TLabel")
             label.pack(anchor="w")
-            value = ttk.Label(item, text="—", style="Panel.TLabel", font=("Segoe UI Semibold", 10))
+            value = ttk.Label(item, text="-", style="Panel.TLabel", font=("Segoe UI Semibold", 10))
             value.pack(anchor="w", pady=(2, 0))
             self.mode_metrics.append((label, value))
 
@@ -248,7 +248,7 @@ class PayloadLabApp(tk.Tk):
         self.mount_text = tk.Text(mounts, height=5, width=24, font=("Consolas", 10), background="#ffffff", foreground=INK, relief="solid", borderwidth=1)
         self.mount_text.grid(row=2, column=0, columnspan=3, sticky="ew", pady=(0, 8))
         self.mount_text.insert("1.0", "-125, -85\n125, -85\n125, 85\n-125, 85")
-        self._field(mounts, "safety_factor", "Safety factor", "1.5", "—", start_row=3)
+        self._field(mounts, "safety_factor", "Safety factor", "1.5", "unitless", start_row=3)
         self._field(mounts, "bolt_diameter", "Nominal bolt diameter", "6", "mm")
         self._field(mounts, "tensile_allowable", "Bolt tensile allowable", "8000", "N")
         self._field(mounts, "shear_allowable", "Bolt shear allowable", "6000", "N")
@@ -287,7 +287,7 @@ class PayloadLabApp(tk.Tk):
                 ("drone_mass", "Drone mass without payload", "8", "kg"),
                 ("drone_cg_x", "Drone CG X", "0", "m"), ("drone_cg_y", "Drone CG Y", "0", "m"), ("drone_cg_z", "Drone CG Z", "0.12", "m"),
                 ("payload_x", "Payload position X", "0.10", "m"), ("payload_y", "Payload position Y", "0", "m"), ("payload_z", "Payload position Z", "0.04", "m"),
-                ("rotor_count", "Rotor count", "4", "—"),
+                ("rotor_count", "Rotor count", "4", "unitless"),
                 ("max_total_thrust", "Maximum total thrust", "180", "N"),
                 ("max_gross_mass", "Maximum gross mass", "12", "kg"),
                 ("allowable_cg_offset", "Allowable horizontal CG offset", "0.08", "m"),
@@ -552,7 +552,7 @@ class PayloadLabApp(tk.Tk):
             values = (
                 str(row["mount_id"]), f"{row['x_mm']:.1f}", f"{row['y_mm']:.1f}", f"{row['axial_n']:.1f}",
                 f"{row['shear_x_n']:.1f}", f"{row['shear_y_n']:.1f}", f"{row['shear_n']:.1f}", f"{row['combined_n']:.1f}",
-                "—" if np.isnan(util) else f"{util:.3f}",
+                "N/A" if np.isnan(util) else f"{util:.3f}",
             )
             self.load_table.insert("", "end", values=values)
 
